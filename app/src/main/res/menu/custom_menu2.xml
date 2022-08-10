@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item android:title="Настройки">
+
+        <menu android:checkableBehavior="single"
+            android:menuCategory="container">
+            <item android:id="@+id/settings"
+                android:title="Изменить фото профиля"
+                android:icon="@drawable/ic_baseline_photo_camera_24">
+            </item>
+
+            <item android:id="@+id/changePassword"
+                android:title="Сменить пароль"
+                android:icon="@drawable/ic_baseline_vpn_key_24">
+            </item>
+
+            <item android:id="@+id/changeUsername"
+                android:title="Сменить имя пользователя"
+                android:icon="@drawable/ic_baseline_edit_24">
+            </item>
+        </menu>
+
+    </item>
+
+
+
+    <group android:menuCategory="container">
+        <item android:id="@+id/signOut"
+            android:title="Выход"
+            android:icon="@drawable/ic_baseline_login_24">
+        </item>
+    </group>
+</menu>

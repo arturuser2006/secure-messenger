@@ -1,0 +1,5 @@
+V add settings (change profile pic(DONE), change username(DONE), change password(DONE))
+V add switch fragment animation
+V add notifications (add isRead field to the Message object. then in the firebase ref for each message if it is not read show the notification.
+                     when enter the chat with unread message, update it as read in database)
+X add recent message sign and pull up new messages in adapter

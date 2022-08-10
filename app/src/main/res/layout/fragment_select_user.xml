@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/view"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"></androidx.recyclerview.widget.RecyclerView>
+
+    <EditText
+        android:id="@+id/fragmentSelectUserEditText"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/btn_shape"
+        android:hint="example@gmail.com"
+        android:textColor="@color/black"
+        android:textCursorDrawable="@null"></EditText>
+
+    <ImageButton
+        android:id="@+id/findByEmailButton"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_above="@+id/recyclerView"
+        android:layout_alignParentRight="true"
+        android:layout_marginVertical="3dp"
+        android:layout_marginRight="3dp"
+        android:background="@android:drawable/ic_menu_search"
+        android:backgroundTint="@color/black"></ImageButton>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/fragmentSelectUserEditText"
+        android:id="@+id/view"
+        android:background="@android:color/darker_gray"></View>
+</RelativeLayout>
