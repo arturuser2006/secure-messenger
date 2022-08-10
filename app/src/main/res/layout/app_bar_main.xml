@@ -18,7 +18,8 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/ThemeOverlay.AppCompat"
             android:theme="@style/ToolbarColoredBackArrow"
-            app:titleTextColor="@color/white">
+            app:titleTextColor="@color/white"
+            app:contentInsetLeft="10dp">
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

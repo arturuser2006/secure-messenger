@@ -3,6 +3,7 @@ package com.example.securemessenger.messages;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -15,11 +16,17 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.example.securemessenger.R;
 import com.example.securemessenger.databinding.FragmentChatBinding;
 import com.example.securemessenger.models.Message;
@@ -48,6 +55,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -297,6 +305,7 @@ public class ChatFragment extends Fragment {
         }
     }
 
+    /**
     private void uploadImageToStorage(Uri photoUri, String text) {
         String filename = UUID.randomUUID().toString();
         StorageReference ref = FirebaseStorage.getInstance().getReference("/images/" + filename);
@@ -316,35 +325,30 @@ public class ChatFragment extends Fragment {
 
                 });
     }
+    */
 
     class MessageItemYou extends Item<GroupieViewHolder> implements MessageItem {
 
-        private Message message;
+        private Message yourMessage;
 
-        public MessageItemYou(Message message) {
-            this.message = message;
+        public MessageItemYou(Message yourMessage) {
+            this.yourMessage = yourMessage;
         }
 
         @Override
         public void bind(@NonNull GroupieViewHolder viewHolder, int position) {
             TextView textView = viewHolder.itemView.findViewById(R.id.yourTextView);
-            textView.setText(message.getText());
-
-            Picasso.get()
-                    .load(MessagesFragment.currentUser.getPhotoPath())
-                    .into((CircleImageView)viewHolder.itemView.findViewById(R.id.yourImageView));
+            textView.setText(yourMessage.getText());
 
             TextView timestamp = viewHolder.itemView.findViewById(R.id.yourTimeStamp);
-            timestamp.setText(message.getTimestamp().toString());
+            timestamp.setText(yourMessage.getTimestamp().toString());
 
-            if (message.getPhotoPath() != null) {
-                ImageView imageView = viewHolder.itemView.findViewById(R.id.attachedImageYou);
-                Picasso.get()
-                        .load(message.getPhotoPath())
-                        .placeholder(R.drawable.rotate_animation)
-                        .into(imageView);
-                imageView.setAdjustViewBounds(true);
-            }
+            ImageView imageView = viewHolder.itemView.findViewById(R.id.attachedImageYou);
+            Glide.with(getContext())
+                    .load(yourMessage.getPhotoPath())
+                    .placeholder(null)
+                    .into(imageView);
+            imageView.setAdjustViewBounds(true);
         }
 
         @Override
@@ -353,44 +357,38 @@ public class ChatFragment extends Fragment {
         }
 
         @Override
-        public void setMessage(Message message) {
-            this.message = message;
+        public void setMessage(Message yourMessage) {
+            this.yourMessage = yourMessage;
         }
 
         @Override
         public Message getMessage() {
-            return message;
+            return yourMessage;
         }
     }
 
     class MessageItemComrade extends Item<GroupieViewHolder> implements MessageItem {
 
-        private Message message;
+        private Message mateMessage;
 
-        public MessageItemComrade(Message message) {
-            this.message = message;
+        public MessageItemComrade(Message mateMessage) {
+            this.mateMessage = mateMessage;
         }
 
         @Override
         public void bind(@NonNull GroupieViewHolder viewHolder, int position) {
             TextView textView = viewHolder.itemView.findViewById(R.id.mateTextView);
-            textView.setText(message.getText());
-
-            Picasso.get()
-                    .load(comradeUser.getPhotoPath())
-                    .into((CircleImageView)viewHolder.itemView.findViewById(R.id.mateImageView));
+            textView.setText(mateMessage.getText());
 
             TextView timestamp = viewHolder.itemView.findViewById(R.id.mateTimeStamp);
-            timestamp.setText(message.getTimestamp().toString());
+            timestamp.setText(mateMessage.getTimestamp().toString());
 
-            if (message.getPhotoPath() != null) {
-                ImageView imageView = viewHolder.itemView.findViewById(R.id.attachedImageMate);
-                Picasso.get()
-                        .load(message.getPhotoPath())
-                        .placeholder(R.drawable.rotate_animation)
-                        .into(imageView);
-                imageView.setAdjustViewBounds(true);
-            }
+            ImageView imageView = viewHolder.itemView.findViewById(R.id.attachedImageMate);
+            Glide.with(getActivity().getApplicationContext())
+                    .load(mateMessage.getPhotoPath())
+                    .placeholder(null)
+                    .into(imageView);
+            imageView.setAdjustViewBounds(true);
         }
 
         @Override
@@ -399,13 +397,13 @@ public class ChatFragment extends Fragment {
         }
 
         @Override
-        public void setMessage(Message message) {
-            this.message = message;
+        public void setMessage(Message mateMessage) {
+            this.mateMessage = mateMessage;
         }
 
         @Override
         public Message getMessage() {
-            return message;
+            return mateMessage;
         }
     }
 
